@@ -30,9 +30,19 @@ class MainActivity : FlutterActivity() {
                 } else {
                     result.error("UNAVAILABLE", "Battery level not available.", null)
                 }
+            } else if (call.method ==  "getBatteryLevelJava") {
+                val batteryLevelService = BatteryService()
+                val batteryLevelJava = batteryLevelService.getBatteryLevel(this)
+
+                if (batteryLevelJava != -1) {
+                    result.success(batteryLevelJava)
+                } else {
+                    result.error("UNAVAILABLE", "Battery level not available.", null)
+                }
             } else {
                 result.notImplemented()
             }
+
         }
 
     }
